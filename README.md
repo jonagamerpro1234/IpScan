@@ -1,0 +1,1 @@
+IP Scanner es una aplicación web ligera que escanea rangos de IP en redes locales para identificar dispositivos activos. Muestra el estado de cada IP, tiempo de respuesta y nombre de host cuando está disponible. Usa caché para optimizar el rendimiento y ofrece una interfaz fácil de usar accesible desde el navegador. Ideal para monitoreo rápido y eficiente de redes locales.
