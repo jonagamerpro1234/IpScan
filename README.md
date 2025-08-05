@@ -85,7 +85,7 @@ http://localhost:3000
 ## Requisitos
 
 - Node.js 18+ (para características modernas y compatibilidad)  
-- Windows, Linux o macOS  
+- Windows, ( Linux o macOS - por el momento no disponible )
 
 ---
 
