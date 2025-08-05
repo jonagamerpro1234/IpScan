@@ -1,0 +1,500 @@
+/* General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Contenedor del resumen */
+#resumen {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #f0f4f8;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    max-width: fit-content;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    user-select: none;
+}
+
+#resumen {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#resumen.visible {
+    opacity: 1;
+}
+
+#btnCancelar {
+    background-color: #ff9800;
+    margin-left: 10px;
+}
+
+#btnCancelar:hover:not(:disabled) {
+    background-color: #e68a00;
+}
+
+/* Tabla de resultados */
+#resultados {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#resultados thead {
+    background-color: #007acc;
+    color: white;
+}
+
+#resultados th,
+#resultados td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* Fade-in para la tabla */
+#resultados tbody.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transición suave para filas individuales */
+#resultados tbody tr {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rowSlideIn 0.4s ease forwards;
+}
+
+#resultados tbody tr:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+#resultados tbody tr:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+@keyframes rowSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Filas para IPs activas e inactivas */
+tr.alive {
+    background-color: #d4edda;
+    color: #155724;
+    transition: background-color 0.3s ease;
+}
+
+tr.dead {
+    background-color: #f8d7da;
+    color: #721c24;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover para filas */
+#resultados tbody tr:hover {
+    filter: brightness(0.95);
+    cursor: default;
+}
+
+/* Botones generales */
+button {
+    padding: 10px 20px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    user-select: none;
+}
+
+button:hover:not(:disabled) {
+    background-color: #005fa3;
+    transform: scale(1.05);
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Botón forzar escaneo */
+#force-scan {
+    background-color: #e74c3c;
+    color: white;
+    margin-left: 10px;
+}
+
+#force-scan:hover:not(:disabled) {
+    background-color: #c0392b;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-left-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Contenedor de botones */
+#botones-container {
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+/* --- Formulario --- */
+#form-container {
+    margin-bottom: 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: #222;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* mejor alineación vertical */
+    gap: 15px;
+}
+
+/* Cada label columna con su input */
+#form-container label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #007acc;
+    min-width: 180px;
+    /* aumento min-width para mejor uniformidad */
+    max-width: 220px;
+    /* límite máximo para evitar que se agrande */
+}
+
+/* Inputs uniformes */
+#form-container input[type="text"] {
+    margin-top: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 2px solid #007acc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    /* ocupa todo el ancho del label */
+    box-sizing: border-box;
+    /* incluye padding en el ancho */
+    max-width: 220px;
+    /* limita máximo ancho */
+}
+
+/* Foco accesible y visible */
+#form-container input[type="text"]:focus {
+    outline: none;
+    border-color: #005fa3;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
+}
+
+/* Labels del rango lado a lado */
+#form-container label:nth-child(2),
+#form-container label:nth-child(3) {
+    flex: 1 1 180px;
+    max-width: 220px;
+}
+
+/* Responsive: en pantallas chicas, apila el form */
+@media (max-width: 500px) {
+    #form-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #form-container label:nth-child(2),
+    #form-container label:nth-child(3) {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        margin-left: 0 !important;
+    }
+}
+
+input {
+    transition: border-color 0.3s ease;
+}
+
+input.error {
+    border-color: #e74c3c !important;
+    /* rojo */
+}
+
+input.valid {
+    border-color: #2ecc71 !important;
+    /* verde */
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.7rem;
+    min-height: 1em;
+    margin-top: 3px;
+    display: block;
+}
+
+#form-error {
+    min-height: 1.2em;
+}
+
+
+/* Toast básico */
+.toast {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.3s forwards, fadeOut 0.3s 2.7s forwards;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Toast container */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+
+/* Success toast */
+.toast.success {
+    background-color: #28a745;
+}
+
+/* Error toast */
+.toast.error {
+    background-color: #dc3545;
+}
+
+
+
+/* --- Modo oscuro para formulario --- */
+body.dark-mode #form-container {
+    color: #a0c8ff;
+}
+
+body.dark-mode #form-container label {
+    color: #8db4ff;
+}
+
+body.dark-mode #form-container input[type="text"] {
+    background-color: #222;
+    border-color: #1f6feb;
+    color: #eee;
+}
+
+body.dark-mode #form-container input[type="text"]:focus {
+    border-color: #1458d6;
+    box-shadow: 0 0 8px rgba(20, 88, 214, 0.8);
+}
+
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode #resultados thead {
+    background-color: #1f6feb;
+    color: #f0f0f0;
+}
+
+body.dark-mode #resultados th,
+body.dark-mode #resultados td {
+    border-color: #333;
+}
+
+body.dark-mode tr.alive {
+    background-color: #235423;
+    color: #d4f4d4;
+}
+
+body.dark-mode tr.dead {
+    background-color: #5a1e1e;
+    color: #f4d4d4;
+}
+
+body.dark-mode #resultados tbody tr:hover {
+    filter: brightness(1.1);
+}
+
+body.dark-mode button {
+    background-color: #1f6feb;
+    color: #f0f0f0;
+}
+
+body.dark-mode button:hover:not(:disabled) {
+    background-color: #1458d6;
+}
+
+body.dark-mode button:disabled {
+    background-color: #555555;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+body.dark-mode #resumen {
+    color: #cccccc;
+    background-color: #555555;
+}
+
+body.dark-mode #resumen .activas {
+    color: #7CFC00;
+    font-weight: 900;
+}
+
+body.dark-mode #resumen .inactivas {
+    color: #FF6347;
+    font-weight: 900;
+}
+
+
+/* filtro*/
+/* Controles de la tabla: filtros y orden */
+#controles-tabla {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: #007acc;
+    user-select: none;
+}
+
+/* Selects y botón de orden */
+#controles-tabla select,
+#controles-tabla button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#controles-tabla select:focus,
+#controles-tabla button:focus {
+    outline: none;
+    border-color: #005fa3;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
+}
+
+#controles-tabla select:hover,
+#controles-tabla button:hover {
+    background-color: #007acc;
+    color: white;
+    border-color: #005fa3;
+}
+
+/* Botón de orden ⬆️⬇️ */
+#btn-toggle-orden {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    padding: 0;
+    border-radius: 50%;
+    text-align: center;
+}
+
+
+/* Modo oscuro */
+body.dark-mode #controles-tabla {
+    color: #a0c8ff;
+}
+
+body.dark-mode #controles-tabla select,
+body.dark-mode #controles-tabla button {
+    background-color: #222;
+    border-color: #1f6feb;
+    color: #a0c8ff;
+}
+
+body.dark-mode #controles-tabla select:hover,
+body.dark-mode #controles-tabla button:hover {
+    background-color: #1f6feb;
+    color: #fff;
+    border-color: #1458d6;
+}

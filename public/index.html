@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <title>Escáner de Red</title>
+</head>
+
+<body>
+    <h1>Escáner de Red</h1>
+
+    <div id="form-container" style="margin-bottom: 20px;">
+        <label>
+            IP individual:
+            <input type="text" id="input-ip" placeholder="Ej: 192.168.1.10" />
+            <small class="error-message" id="error-ip"></small>
+        </label>
+        <br />
+        <label>
+            Rango inicio:
+            <input type="text" id="input-start-ip" placeholder="Ej: 192.168.1.10" />
+            <small class="error-message" id="error-start-ip"></small>
+        </label>
+        <label style="margin-left: 20px;">
+            Rango fin:
+            <input type="text" id="input-end-ip" placeholder="Ej: 192.168.1.20" />
+            <small class="error-message" id="error-end-ip"></small>
+        </label>
+        <div id="form-error" style="color: red; font-weight: 600; margin-top: 5px;"></div>
+    </div>
+
+    <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+
+
+    <div id="botones-container">
+        <button id="btnEscanear">🔍 Iniciar escaneo</button>
+        <button id="btnExportar" disabled>📥 Exportar a CSV</button>
+        <button id="btnModoOscuro" type="button">🌙 Modo Oscuro</button>
+        <button id="force-scan" class="btn">Forzar escaneo</button>
+        <button id="btnCancelar" disabled>⏹ Cancelar escaneo</button>
+    </div>
+
+    <div id="resumen"></div>
+
+    <div id="status" style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+        <div id="spinner" class="spinner"
+            style="display: none; width: 16px; height: 16px; border: 2px solid #ccc; border-top: 2px solid #333; border-radius: 50%; animation: spin 1s linear infinite;">
+        </div>
+        <span id="status-message" style="font-weight: bold;"></span>
+    </div>
+
+    <div id="progreso-container" style="display:none; margin-top: 15px;">
+        <div id="progreso-text" style="margin-bottom: 5px;">Escaneando 0 de 0 IPs...</div>
+        <div style="background: #ccc; height: 16px; border-radius: 8px; overflow: hidden;">
+            <div id="barra-progreso" style="height: 100%; width: 0%; background: #4caf50; transition: width 0.3s;">
+            </div>
+        </div>
+    </div>
+
+    <div id="controles-tabla"
+        style="margin-top: 15px; margin-bottom: 10px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+        <label>
+            Filtrar por estado:
+            <select id="filtro-estado">
+                <option value="all">Todos</option>
+                <option value="alive">Activos 🟢</option>
+                <option value="dead">Inactivos 🔴</option>
+            </select>
+        </label>
+
+        <label>
+            Ordenar por:
+            <select id="orden-columna">
+                <option value="hostname">Nombre</option>
+                <option value="ip">IP</option>
+                <option value="estado">Estado</option>
+                <option value="time">Tiempo</option>
+            </select>
+        </label>
+
+        <button id="btn-toggle-orden" title="Cambiar orden asc/desc">⬆️</button>
+    </div>
+
+
+    <table id="resultados">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>IP</th>
+                <th>Estado</th>
+                <th>Tiempo</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
